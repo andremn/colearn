@@ -1,0 +1,91 @@
+﻿@model FinalProject.ViewModels.QuestionAnswerViewModel
+
+<div id="answer-@Model.Id" class="question-answer">
+    <div>
+        <div style="float: left">
+            <img class="question-user-pic" src="@Model.UserPicture" alt=""/>
+        </div>
+
+        @if (!Model.IsOwner)
+        {
+            <div id="@Model.UserId" class="answer-user">
+                <p class="question-user-name">
+                    <a href="/Account/Details/@Model.UserId">@Model.UserName</a>
+                </p>
+                <p class="question-date">em @Model.DateCreated</p>
+            </div>
+
+            <a class="btn btn-link btn-video-chat"
+               title="Iniciar videoconferência para esta resposta"
+               data-question-id="@Model.QuestionId"
+               data-answer-author="@Model.UserId">
+                <i class="fa fa-video-camera"></i>
+            </a>
+        }
+        else
+        {
+            <div id="@Model.UserId" class="answer-user" style="float: none">
+                <p class="question-user-name">
+                    <a href="/Account/Details">@Model.UserName</a>
+                </p>
+                <p class="question-date">em @Model.DateCreated</p>
+            </div>
+        }
+    </div>
+    <br/>
+    <div class="answer-content">
+        @if (Model.IsVideoAnswer)
+        {
+            <div class="video-answer" style="background-image: url(@Url.Content(Model.Thumbnail));"
+                 data-video-src="@Model.Content">
+                <div class="video-answer-overlay">
+                    <i class="fa fa-play"></i>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>
+                @Html.Raw(Model.Content)
+            </p>
+        }
+
+        @{
+            var readOnly = false;
+            string title;
+
+            if (Model.IsOwner)
+            {
+                title = "Você não pode avaliar sua própria resposta";
+                readOnly = true;
+            }
+            else if (!Model.CanRate)
+            {
+                title = "Você não pode avaliar essa resposta";
+                readOnly = true;
+            }
+            else
+            {
+                title = "Avaliar essa resposta";
+            }
+        }
+
+        @if (readOnly)
+        {
+            <input class="kv-ltr-theme-fa-star question-rating"
+                   value="@Model.Rating" dir="ltr" data-size="xs"
+                   readonly="readonly" data-count="@Model.Count"
+                   data-answer-id="@Model.Id"
+                   data-already-rated="Você já avaliou essa resposta"
+                   title="@title">
+        }
+        else
+        {
+            <input class="kv-ltr-theme-fa-star question-rating"
+                   value="@Model.Rating" dir="ltr" data-size="xs"
+                   data-answer-id="@Model.Id" data-count="@Model.Count"
+                   data-already-rated="Você já avaliou essa resposta"
+                   title="@title">
+        }
+    </div>
+</div>

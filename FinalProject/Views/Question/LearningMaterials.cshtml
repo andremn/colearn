@@ -1,0 +1,40 @@
+﻿@model FinalProject.ViewModels.LearningMaterialsViewModel
+@{
+    ViewBag.Title = "Materiais de estudo";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+
+@Styles.Render("~/bundles/spinner")
+@Styles.Render("~/bundles/learning-materials-style")
+
+<div id="root" class="container" data-query="@Model.Query">
+    <div class="row success" style="margin-top: 20px">
+        <h4 class="text-center">
+            Procurando por materiais...
+            <br/>
+            <small>
+                Enquanto você espera a sua pergunta ser moderada, nós tentaremos encontrar alguns materiais de estudo para você!
+            </small>
+        </h4>
+        <br/>
+    </div>
+
+    <div class="row error hidden" style="margin-top: 20px">
+        <h4 class="text-center">
+            Não conseguimos procurar por materiais
+            <br/>
+            <small>
+                Algo deu errado enquanto pesquisávamos por materiais para você...
+            </small>
+        </h4>
+    </div>
+</div>
+
+<div class="cssload-container">
+    <div class="cssload-double-torus"></div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/learningMaterials")
+}

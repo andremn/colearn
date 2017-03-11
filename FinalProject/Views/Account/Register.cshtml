@@ -1,0 +1,149 @@
+﻿@model FinalProject.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Bem-vindo";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet">
+
+<div class="container">
+    <section id="registerForm" class="form-center">
+        <div class="col-xs-12 col-md-6 col-sm-6">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <h4 class="text-center">Crie uma nova conta</h4>
+                <hr />
+
+                <h6>*Campos obrigatórios</h6>
+                <span class="help-block"></span>
+
+                if (ViewData.ModelState[string.Empty] != null && ViewData.ModelState[string.Empty].Errors.Count > 0)
+                {
+                    <div class="alert alert-error alert-error-custom">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                    </div>
+                }
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i>*</span>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.FirstName) })
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.FirstName, string.Empty, new { @class = "text-danger" })
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i>&nbsp;</span>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.LastName) })
+                    </div>
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i>*</span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email) })
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Email, string.Empty, new { @class = "text-danger" })
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true">*</i>&nbsp;&nbsp;</span>
+
+                        @{
+                            var defaultGradeOption = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.Grade).ToHtmlString());
+                            var grades = Model.Grades;
+                        }
+
+                        <select id="gradeSelect" name="Grade" class="selectpicker form-control"
+                                data-val="true"
+                                data-live-search="true"
+                                data-val-required="@defaultGradeOption"
+                                data-live-search-placeholder="Procure por um nível acadêmico"
+                                data-style="btn-default select-btn"
+                                data-selectOnTab="true"
+                                data-none-results-text="Nenhum nível encontrado"
+                                title="@defaultGradeOption">
+                            <option class="filter-item items" value="">@defaultGradeOption</option>
+
+                            @foreach (var grade in grades)
+                            {
+                                var gradeName = grade.Name;
+
+                                if (grade.Id == Model.Grade)
+                                {
+                                    <option class="filter-item items"
+                                            selected="selected"
+                                            data-filter="@gradeName"
+                                            data-value="@grade.Id"
+                                            value="@grade.Id">
+                                        @gradeName
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option class="filter-item items"
+                                            data-filter="@gradeName"
+                                            data-value="@grade.Id"
+                                            value="@grade.Id">
+                                        @gradeName
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Grade, string.Empty, new { @class = "text-danger" })
+                </div>
+
+                <span class="help-block"></span>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i>*</span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Password) })
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @class = "text-danger" })
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i>*</span>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, string.Empty, new { @class = "text-danger" })
+                </div>
+
+                <span class="help-block"></span>
+
+                <input type="submit" value="Criar conta" class="btn btn-primary" />
+
+                <span class="help-block"></span>
+
+                <a href="/">Já tem uma conta?</a>
+            }
+        </div>
+    </section>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/select")
+    @Scripts.Render("~/bundles/register")
+}

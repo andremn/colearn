@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Videoconferência";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/star-rating.min.css" rel="stylesheet">
+<link href="~/Content/theme-krajee-fa.min.css" rel="stylesheet">
+@Styles.Render("~/bundles/video-answer-style")
+
+<div class="container">
+    <div class="video-container full">
+        <video id="localVideo" muted></video>
+        <video id="remoteVideo" muted></video>
+    </div>
+    <canvas data-is-presenter="@ViewBag.IsPresenter"
+            data-chat-id="@ViewBag.ChatId"
+            data-user-id="@ViewBag.UserId">
+    </canvas>
+
+    <div class="tool-bar">
+        <a id="eraserBtn" class="btn btn-link tool-bar-item" title="Apagador">
+            <i class="fa fa-eraser"></i>
+        </a>
+        <a id="penBtn" class="btn btn-link tool-bar-item collapse" title="Caneta">
+            <i class="fa fa-pencil"></i>
+        </a>
+        <a id="brushColorPickerBtn" class="btn btn-link tool-bar-item" style="color: black" title="Cor do pincel">
+            <i class="fa fa-paint-brush"></i>
+        </a>
+        <a id="endChatBtn" class="btn btn-link tool-bar-item" title="Encerrar conversa">
+            <i class="fa fa-stop"></i>
+        </a>
+        <span class="tool-bar-item" style="margin-top: 3px">&nbsp;|&nbsp;</span>
+        <span id="timer" class="tool-bar-item" style="margin-top: 6px">00:00:00</span>
+    </div>
+
+    <div class="tool-bar color-picker">
+        <a class="btn btn-link color-item blue" title="Azul"></a>
+        <a class="btn btn-link color-item red" title="Vermelho"></a>
+        <a class="btn btn-link color-item green" title="Verde"></a>
+        <a class="btn btn-link color-item yellow" title="Amarelo"></a>
+        <a class="btn btn-link color-item black" title="Preto"></a>
+    </div>
+</div>
+
+<div id="noDeviceErrorModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Não foi possível iniciar a videoconferência</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Entendi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmStopChatModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmação</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Deseja mesmo encerrar esta videoconferência?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="selectCameraModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Selecione uma camêra</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Selecione qual camêra você deseja utilizar</h5>
+                <br/>
+                <select style="min-width: 100%"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Pronto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/video-answer")
+}

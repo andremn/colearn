@@ -1,0 +1,73 @@
+﻿.preferences {
+    margin-left: 0;
+    margin-top: 50px;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .preferences {
+        margin-left: 15%;
+        margin-top: 50px;
+        width: 70%;
+    }
+}
+
+.panel { margin-top: 3%; }
+
+.panel .panel-body .row { margin: 25px 0; }
+
+.panel .panel-body .btn { margin: 0 5px; }
+
+.panel .panel-body .btn.btn-primary { margin-right: 0; }
+
+.preference-header { font-weight: bold; }
+
+.similarity-preference { margin-top: 8px; }
+
+.slider.slider-horizontal {
+    -moz-min-width: 85%;
+    -ms-min-width: 85%;
+    -o-min-width: 85%;
+    -webkit-min-width: 85%;
+    min-width: 85%;
+}
+
+.slider-selection { background: #2196f3; }
+
+.slider-track { background: #f8f8f8; }
+
+.slider-handle {
+    -moz-box-shadow: 0 1px 1px #000000;
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    -ms-box-shadow: 0 1px 1px #000000;
+    /* ReSharper disable once RequiresFallbackColor */
+    -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0 1px 1px #000000;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    background: white;
+    box-shadow: 0 1px 1px #000000;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.rating-container {
+    margin-left: -10px;
+    margin-top: -11px;
+}
+
+.star .fa.fa-star, .star .fa.fa-star-o { font-size: 24px; }
+
+.star .fa.fa-star { color: #2196f3; }
+
+.caption, .clear-rating { padding-top: 10px; }
+
+.institutions-preference { margin-left: -15px; }
+
+.grade-preference { margin-left: -15px; }
+
+.year-preference { margin-left: -10px; }
+
+.btn.dropdown-toggle.bs-placeholder {
+    color: black;
+}
+
+#similarityValue { font-size: 12px; }

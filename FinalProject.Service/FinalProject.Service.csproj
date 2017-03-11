@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B78B963-1DF8-4C14-9440-6BAB2DC11F78}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FinalProject.Service</RootNamespace>
+    <AssemblyName>FinalProject.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\GradeService.cs" />
+    <Compile Include="Admin\IGradeService.cs" />
+    <Compile Include="Answer\AnswerService.cs" />
+    <Compile Include="Answer\IAnswerService.cs" />
+    <Compile Include="Calendar\CalendarService.cs" />
+    <Compile Include="Calendar\ICalendarService.cs" />
+    <Compile Include="DefaultNotificationCategories.cs" />
+    <Compile Include="Institution\IInstitutionService.cs" />
+    <Compile Include="Institution\InstitutionService.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="Notification\Events\INotificationData.cs" />
+    <Compile Include="Notification\Events\NewQuestionNotificationData.cs" />
+    <Compile Include="Notification\Events\TagRequestNotificationData.cs" />
+    <Compile Include="Notification\Events\NotificationEvent.cs" />
+    <Compile Include="Notification\Listeners\IListener.cs" />
+    <Compile Include="Notification\NotificationListener.cs" />
+    <Compile Include="Preference\PreferenceService.cs" />
+    <Compile Include="Preference\IPreferenceService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question\QuestionService.cs" />
+    <Compile Include="Question\IQuestionService.cs" />
+    <Compile Include="Recommendation\IRecommendationService.cs" />
+    <Compile Include="Recommendation\RecommendationService.cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\GradeAttribute .cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\IPreferenceModelBuilder.cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\PreferenceAttribute.cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\PreferenceModelBuilder.cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\InstitutionAttribute .cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\TagAttribute.cs" />
+    <Compile Include="Recommendation\Recommenders\IStudentRecommender.cs" />
+    <Compile Include="Recommendation\Recommenders\StudentRecommender.cs" />
+    <Compile Include="Recommendation\Recommenders\Attributes\AvgRatingAttribute.cs" />
+    <Compile Include="Student\IStudentService.cs" />
+    <Compile Include="Student\StudentService.cs" />
+    <Compile Include="Tag\ITagService.cs" />
+    <Compile Include="Tag\TagService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FinalProject.Model\FinalProject.Model.csproj">
+      <Project>{1cc029c6-661b-4945-9ffe-4facb882b543}</Project>
+      <Name>FinalProject.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FinalProject.Repository\FinalProject.DataAccess.csproj">
+      <Project>{038b9169-27e7-4ef4-b324-3c56ac23a77f}</Project>
+      <Name>FinalProject.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FinalProject.Shared\FinalProject.Shared.csproj">
+      <Project>{646b1211-42ce-4283-a830-6280101ecac0}</Project>
+      <Name>FinalProject.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

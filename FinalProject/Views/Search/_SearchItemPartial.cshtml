@@ -1,0 +1,61 @@
+﻿@using FinalProject.Extensions
+@using FinalProject.LocalResource
+@model FinalProject.ViewModels.StudentSearchListItemViewModel
+
+@{
+    var currentUserName = User.Identity.GetName(Request.GetOwinContext());
+}
+
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div id="@Model.Id" class="search-block" onclick="window.location.href=href='/Account/Details/@Model.Id'">
+        <div class="search-user-img" style="background-image: url(@Model.ProfilePic)"></div>
+        <div class="search-user">
+            <div class="search-username">@Model.Name</div>
+            <div class="search-email search-small">
+                <a href="mailto:@Model.Email?Subject='@currentUserName' do CoLearn">@Model.Email</a>
+            </div>
+            <div class="search-institution search-small">
+                @Model.Institution &bull; <span>@Model.Grade</span>
+            </div>
+        </div>
+        <div class="search-content">
+            @if (!string.IsNullOrWhiteSpace(Model.Similarity))
+            {
+                <div class="search-user-similarity">
+                    <span class="progress-label">@Resource.RecommendedStudentBlockSimilarityLabel</span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="@Model.Similarity"
+                             aria-valuemin="0" aria-valuemax="100" style="-moz-min-width: 2em; -ms-min-width: 2em; -o-min-width: 2em; -webkit-min-width: 2em; min-width: 2em; width: @Model.Similarity%;">
+                            @Model.Similarity%
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="search-user-rating">
+                <span class="rating-label">@Resource.RecommendedStudentBlockRatingLabel</span>
+                <input class="kv-ltr-theme-fa-star" data-step="0.1" data-show-clear="false" data-clear-caption="Nenhuma avaliação"
+                       readonly="readonly" value="@Model.AvgRating" data-ratings="@Model.RatingsCount"
+                       dir="ltr" data-size="xs"/>
+            </div>
+
+            <div class="search-user-tags">
+                <div class="search-user-tags-block">
+                    <span class="search-user-tags-label">@Resource.RecommendedStudentBlockCanHelpLabel</span>
+                    <br />
+                    @if (Model?.InstructorTags != null && Model.InstructorTags.Count > 0)
+                    {
+                        foreach (var tag in Model.InstructorTags)
+                        {
+                            <label class="label label-primary user-tag">@tag.Text</label>
+                        }
+                    }
+                    else
+                    {
+                        <h6>Nenhum assunto informado</h6>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

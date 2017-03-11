@@ -1,0 +1,19 @@
+﻿.ellip {
+    display: block;
+    height: 100%;
+    padding-bottom: 5px;
+}
+
+.ellip-line {
+    display: inline-block;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+
+.ellip,
+.ellip-line {
+    overflow: hidden;
+    position: relative;
+}

@@ -1,0 +1,21 @@
+blockquote {
+    border-left: 3px solid rgba(0, 0, 0, .8);
+    margin: 0;
+    padding-left: 20px;
+}
+
+.mce-edit-focus { outline: 1px solid blue; }
+
+.tinymce {
+    border: 1px solid gray;
+    margin: 10px;
+    overflow: auto;
+    padding: 10px;
+}
+
+table, td { border: 1px dashed gray; }
+
+/*.mce-tinymce-inline {
+	transition: left 50ms ease-in-out, top 50ms ease-in-out;
+}
+*/

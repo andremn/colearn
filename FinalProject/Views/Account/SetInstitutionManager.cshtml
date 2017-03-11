@@ -1,0 +1,173 @@
+﻿@using FinalProject.ViewModels
+@model RegisterInstitutionManagerViewModel
+@{
+    ViewBag.Title = "Novo moderador";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet">
+
+<div class="container">
+    <section id="registerForm" class="form-center">
+        <div class="col-xs-12 col-md-6 col-sm-6">
+            @using (Html.BeginForm("SetInstitutionManager", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+
+                <h4 class="text-center">Adicione um moderador a uma instituição</h4>
+                <hr/>
+
+                if (ViewData.ModelState[string.Empty] != null && ViewData.ModelState[string.Empty].Errors.Count > 0)
+                {
+                    <div class="alert alert-error alert-error-custom">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
+                    </div>
+                }
+
+                @Html.HiddenFor(m => m.IsRequest)
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i>&nbsp;</span>
+                        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control", placeholder = Html.DisplayNameFor(m => m.FirstName)})
+                    </div>
+                    <br/>
+                    @Html.ValidationMessageFor(m => m.FirstName, string.Empty, new {@class = "text-danger"})
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i>&nbsp;</span>
+                        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", placeholder = Html.DisplayNameFor(m => m.LastName)})
+                    </div>
+                    <br/>
+                    @Html.ValidationMessageFor(m => m.LastName, string.Empty, new {@class = "text-danger"})
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i>*</span>
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email)})
+                        <span class="input-group-btn">
+                            <button id="searchBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                    <br/>
+                    @Html.ValidationMessageFor(m => m.Email, string.Empty, new {@class = "text-danger"})
+                </div>
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-university"></i>&nbsp;</span>
+                        @{
+                            var defaultOption = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.InstitutionId).ToHtmlString());
+                            var institutions = Model?.Institutions;
+
+                            // Remove the '*' caracter
+                            defaultOption = defaultOption.Remove(defaultOption.Length - 1, 1);
+                        }
+
+                        @if (institutions != null && institutions.Count > 0)
+                        {
+                            if (Model != null && Model.InstitutionIndex > -1)
+                            {
+                                var institution = institutions[Model.InstitutionIndex];
+
+                                <select id="InstitutionId" name="InstitutionId" class="selectpicker form-control"
+                                        data-val="true"
+                                        data-val-required="@defaultOption"
+                                        data-style="btn-default select-btn"
+                                        data-selectOnTab="true">
+
+                                    <option class="filter-item items"
+                                            selected="selected"
+                                            data-value="@institution.Id"
+                                            value="@institution.Id">
+                                        @institution.FullName
+                                    </option>
+                                </select>
+                            }
+                            else
+                            {
+                                <select id="InstitutionId" name="InstitutionId" class="selectpicker form-control"
+                                        data-val="true"
+                                        data-live-search="true"
+                                        data-val-required="@defaultOption"
+                                        data-style="btn-default select-btn"
+                                        data-selectOnTab="true">
+                                    <option class="filter-item items" value="">@defaultOption</option>
+
+                                    @foreach (var institution in institutions)
+                                    {
+                                        var institutionName = $"{institution.FullName} ({institution.ShortName})";
+
+                                        if (Model != null && institution.Code == Model.InstitutionId)
+                                        {
+                                            <option class="filter-item items"
+                                                    selected="selected"
+                                                    data-filter="@institutionName"
+                                                    data-value="@institution.Id"
+                                                    data-subtext="@institution.ShortName"
+                                                    value="@institution.Id">
+                                                @institution.FullName
+                                            </option>
+                                        }
+                                        else
+                                        {
+                                            <option class="filter-item items"
+                                                    data-filter="@institutionName"
+                                                    data-value="@institution.Id"
+                                                    data-subtext="@institution.ShortName"
+                                                    value="@institution.Id">
+                                                @institution.FullName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            }
+                        }
+                    </div>
+                    <br/>
+                    @Html.ValidationMessageFor(m => m.InstitutionId, string.Empty, new {@class = "text-danger"})
+                </div>
+
+                <span class="help-block"></span>
+                <span class="help-block"></span>
+
+                <input type="submit" value="Confirmar" class="btn btn-primary"/>
+            }
+        </div>
+    </section>
+</div>
+
+<div id="notFoundModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nada encontrado</h4>
+            </div>
+            <div class="modal-body">
+                <h6>Não encontramos nenhum usuário com o e-mail informado</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/select")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/institutionSearchSelect.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Account/setInstitutionManager.js")"></script>
+}

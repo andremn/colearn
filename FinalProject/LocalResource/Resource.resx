@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountResponseEmailSubject" xml:space="preserve">
+    <value>Sua conta no {0}</value>
+  </data>
+  <data name="ApprovedTagsNodeText" xml:space="preserve">
+    <value>Aprovadas</value>
+  </data>
+  <data name="ChooseTagsText" xml:space="preserve">
+    <value>Escolha suas tags</value>
+  </data>
+  <data name="CollpaseAllNodesTreeTitle" xml:space="preserve">
+    <value>Recolher tudo</value>
+  </data>
+  <data name="ConfirmAccountEmailMessage" xml:space="preserve">
+    <value>Para começar a usar sua conta, você só precisa validar seu e-mail clicando &lt;a href="{0}"&gt;aqui&lt;/a&gt;.</value>
+  </data>
+  <data name="ConfirmTagDeletionModalMessage" xml:space="preserve">
+    <value>Certeza de que deseja deletar essa tag?</value>
+  </data>
+  <data name="ConfirmTagDeletionModalTitle" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="DenyInstitutionRequestEmailMessage" xml:space="preserve">
+    <value>&lt;p&gt;Seu pedido para cadastrar a universidade &lt;b&gt;{0}&lt;/b&gt; foi negado pelo seguinte motivo:&lt;/p&gt;&lt;blockquote&gt;&lt;q&gt;&lt;i&gt;{1}&lt;i/&gt;&lt;/q&gt;&lt;/blockquote&gt;</value>
+  </data>
+  <data name="EditViewTitle" xml:space="preserve">
+    <value>Editar perfil</value>
+  </data>
+  <data name="EmailSentTo" xml:space="preserve">
+    <value>E-mail enviado para &lt;b&gt;{0}&lt;/b&gt;</value>
+  </data>
+  <data name="EnterTagNamePlaceholderText" xml:space="preserve">
+    <value>Adicione um novo assunto</value>
+  </data>
+  <data name="ErrorCreatingTagMessage" xml:space="preserve">
+    <value>Erro ao criar tag</value>
+  </data>
+  <data name="ErrorDeletingTagMessage" xml:space="preserve">
+    <value>Erro ao deletar tag</value>
+  </data>
+  <data name="ErrorNotFoundTargetTagMessage" xml:space="preserve">
+    <value>A tag de destino não foi encontrada</value>
+  </data>
+  <data name="ErrorNotPendingSourceTagMessage" xml:space="preserve">
+    <value>A tag de origem deve estar pendente de aprovação</value>
+  </data>
+  <data name="ErrorTagNotFound" xml:space="preserve">
+    <value>Tag não encontrada</value>
+  </data>
+  <data name="ErrorUpdatingTagMessage" xml:space="preserve">
+    <value>Erro ao atualizar tag</value>
+  </data>
+  <data name="ExpandAllNodesTreeTitle" xml:space="preserve">
+    <value>Expandir tudo</value>
+  </data>
+  <data name="GotItText" xml:space="preserve">
+    <value>Entendi</value>
+  </data>
+  <data name="InstructorTagNotAdded" xml:space="preserve">
+    <value>A tag '{0}' não existe em nosso sistema ainda.  Vamos analisá-la e, se aprovarmos, ela aparecerá para você.</value>
+  </data>
+  <data name="InstructorTagsNotAdded" xml:space="preserve">
+    <value>As tags {0} não existem em nosso sistema ainda. Vamos analisá-las e, se aprovarmos, elas aparecerão para você.</value>
+  </data>
+  <data name="InstructorTagsViewHeader" xml:space="preserve">
+    <value>Disciplinas que você pode ajudar outros estudantes</value>
+  </data>
+  <data name="InstructorTagsViewSubheader" xml:space="preserve">
+    <value>Adicione disciplinas através de tags clicando no botão abaixo</value>
+  </data>
+  <data name="ManageTagsViewHeader" xml:space="preserve">
+    <value>Controle as tags de sua instituição</value>
+  </data>
+  <data name="ManageTagsViewSubHeader" xml:space="preserve">
+    <value>Crie, edite, remova, aprove e rejeite tags da sua instituição</value>
+  </data>
+  <data name="ManageTagsViewTitle" xml:space="preserve">
+    <value>Controlar tags</value>
+  </data>
+  <data name="MultipleAnswersText" xml:space="preserve">
+    <value>{0} respostas</value>
+  </data>
+  <data name="NewAnswerToQuestionEmailContent" xml:space="preserve">
+    <value>Sua pergunta &lt;q&gt;&lt;i&gt;{0}&lt;i/&gt;&lt;/q&gt; tem uma nova resposta:
+&lt;/p&gt;&lt;blockquote&gt;&lt;q&gt;&lt;i&gt;{1}&lt;i/&gt;&lt;/q&gt;&lt;/blockquote&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="NewAnswerToQuestionEmailSubject" xml:space="preserve">
+    <value>Nova resposta para a sua pergunta no CoLearn</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="NoAnswersText" xml:space="preserve">
+    <value>Nenhuma resposta ainda</value>
+  </data>
+  <data name="NoInstitutionModalMessage" xml:space="preserve">
+    <value>Para ter acesso ao conteúdo do site, uma instituição deve ser selecionada. Assim, apenas o conteúdo da instituição selecionada será exibido para você.</value>
+  </data>
+  <data name="NoInstitutionModalTitle" xml:space="preserve">
+    <value>Quase pronto</value>
+  </data>
+  <data name="NoInstructorTagsText" xml:space="preserve">
+    <value>Este estudante não informou nenhum assunto ainda</value>
+  </data>
+  <data name="NoQuestionFoundText" xml:space="preserve">
+    <value>Nenhuma pergunta encontrada relacionada a você</value>
+  </data>
+  <data name="NoticeText" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+  <data name="NotVerifiedEmailErrorMessage" xml:space="preserve">
+    <value>E-mail não confirmado. Verifique sua caixa de entrada ou sua caixa de spam</value>
+  </data>
+  <data name="PendingTagsNodeText" xml:space="preserve">
+    <value>Pendentes</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>CoLearn</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="QuestionTagRequiredErrorMessage" xml:space="preserve">
+    <value>A sua pergunta deve ter ao menos uma tag</value>
+  </data>
+  <data name="QuestionTitleRequiredErrorMessage" xml:space="preserve">
+    <value>A sua pergunta deve ter um título</value>
+  </data>
+  <data name="RequestReponseEmailSubject" xml:space="preserve">
+    <value>Sua requisição no {0}</value>
+  </data>
+  <data name="SingleAnswerText" xml:space="preserve">
+    <value>1 resposta</value>
+  </data>
+  <data name="StudentDefaultEmailContent" xml:space="preserve">
+    <value>&lt;p&gt;Olá &lt;b&gt;{0}&lt;/b&gt;,&lt;/p&gt;&lt;p&gt;{1}&lt;/p&gt;</value>
+  </data>
+  <data name="StudentContributionsSectionTitle" xml:space="preserve">
+    <value>Contribuições feitas por este estudante</value>
+  </data>
+  <data name="StudentTagsSectionTitle" xml:space="preserve">
+    <value>Assuntos que este estudante pode te ajudar</value>
+  </data>
+  <data name="Instructor" xml:space="preserve">
+    <value>Instrutor</value>
+  </data>
+  <data name="TimelineViewTitle" xml:space="preserve">
+    <value>Início</value>
+  </data>
+  <data name="TypeQuestionDescriptionText" xml:space="preserve">
+    <value>Escreva mais detalhes sobre sua pergunta</value>
+  </data>
+  <data name="TypeQuestionTitleText" xml:space="preserve">
+    <value>Digite sua pergunta</value>
+  </data>
+  <data name="WrongUserOrPasswordErrorMessage" xml:space="preserve">
+    <value>E-mail ou senha incorretos</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="QuestionNoTagAded" xml:space="preserve">
+    <value>Como nenhuma das tags para sua pergunta existe em nosso sistema, sua pergunta não será listada até que pelo menos uma das tags seja aprovada. Enquanto isso, vamos tentar te ajudar com uma lista de materiais tiradas da web!</value>
+  </data>
+  <data name="QuestionTagNotAdded" xml:space="preserve">
+    <value>A tag '{0}' não existe em nosso sistema ainda.  Vamos analisá-la e, se aprovarmos, ela aparecerá na sua pergunta.</value>
+  </data>
+  <data name="QuestionTagsNotAdded" xml:space="preserve">
+    <value>As tags {0} não existem em nosso sistema ainda. Vamos analisá-las e, se aprovarmos, elas aparecerão na sua pergunta</value>
+  </data>
+  <data name="NoSelfInstructorTagsText" xml:space="preserve">
+    <value>Você não informou nenhum assunto ainda</value>
+  </data>
+  <data name="AnswerQuestionFieldPlaceholder" xml:space="preserve">
+    <value>Responda a essa pergunta</value>
+  </data>
+  <data name="ApproveTagInstructionText" xml:space="preserve">
+    <value>Para aprovar uma tag, arraste-a para "Aprovadas"</value>
+  </data>
+  <data name="AgendaViewHeader" xml:space="preserve">
+    <value>Gerencie seus horários livres</value>
+  </data>
+  <data name="AgendaViewSubHeader" xml:space="preserve">
+    <value>Informe a outros estudantes os dias e  horários que você está disponível para videoconferência</value>
+  </data>
+  <data name="AgendaViewTitle" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="AvailableEventTitle" xml:space="preserve">
+    <value>Disponível</value>
+  </data>
+  <data name="BusyEventTitle" xml:space="preserve">
+    <value>Agendado</value>
+  </data>
+  <data name="FilterTimelineTitleFieldPlaceholder" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="FilterTimelineTagsFieldPlaceholder" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="AndOperator" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="OrOperator" xml:space="preserve">
+    <value>OU</value>
+  </data>
+  <data name="TimelineFilterModalTitle" xml:space="preserve">
+    <value>Filtre as perguntas por título e/ou tags</value>
+  </data>
+  <data name="TimelineFilterTextWithTags" xml:space="preserve">
+    <value>Filtrando perguntas com as tags {0}</value>
+  </data>
+  <data name="TimelineFilterTextWithTitle" xml:space="preserve">
+    <value>Filtrando perguntas que contém "{0}" no título</value>
+  </data>
+  <data name="TimelineFilterTextWithTitleTags" xml:space="preserve">
+    <value>Filtrando perguntas contendo "{0}" no título {1} contendo as tags {2}</value>
+  </data>
+  <data name="TimelineFilterTextWithTag" xml:space="preserve">
+    <value>Filtrando perguntas com a tag "{0}"</value>
+  </data>
+  <data name="TimelineFilterTextWithTitleTag" xml:space="preserve">
+    <value>Filtrando perguntas contendo "{0}" no título {1} com a tag "{2}"</value>
+  </data>
+  <data name="PreferencesViewHeader" xml:space="preserve">
+    <value>Suas preferências</value>
+  </data>
+  <data name="PreferencesViewSubheader" xml:space="preserve">
+    <value>Como você deseja que o sistema recomende instrutores para te ajudar?</value>
+  </data>
+  <data name="PreferencesViewTitle" xml:space="preserve">
+    <value>Preferências</value>
+  </data>
+  <data name="PreferencesSimilariryPanelTitle" xml:space="preserve">
+    <value>Similaridade mínima entre o seu perfil e os perfis dos instrutores recomendados para você</value>
+  </data>
+  <data name="AdminPreferencesViewHeader" xml:space="preserve">
+    <value>Preferências padrões</value>
+  </data>
+  <data name="AdminPreferencesViewSubheader" xml:space="preserve">
+    <value>Preferências para serem utilizadas caso um estudante ainda não tenha definido as suas preferências</value>
+  </data>
+  <data name="RecommendedStudentBlockCanHelpLabel" xml:space="preserve">
+    <value>Pode ajudar em</value>
+  </data>
+  <data name="RecommendedStudentBlockRatingLabel" xml:space="preserve">
+    <value>Avaliação média da comunidade</value>
+  </data>
+  <data name="RecommendedStudentBlockSeeksHelpLabel" xml:space="preserve">
+    <value>Procura por ajuda em</value>
+  </data>
+  <data name="RecommendedStudentBlockSimilarityLabel" xml:space="preserve">
+    <value>Similaridade com seu perfil</value>
+  </data>
+  <data name="RecommendedStudentsSectionSubtitle" xml:space="preserve">
+    <value>Estes instrutores foram recomendados para você de acordo com suas &lt;a href="/Preference"&gt;preferências&lt;/a&gt;</value>
+  </data>
+  <data name="RecommendedStudentsSectionTitle" xml:space="preserve">
+    <value>Instrutores recomendados para você</value>
+  </data>
+  <data name="GradeNameFieldPlaceholder" xml:space="preserve">
+    <value>Formação</value>
+  </data>
+  <data name="GradeYearFieldPlaceholder" xml:space="preserve">
+    <value>Ano</value>
+  </data>
+  <data name="CreateGradeViewModelNameFieldRequiredErrorMessage" xml:space="preserve">
+    <value>O nome da formação é obrigatório</value>
+  </data>
+  <data name="FilterTimelineStudentItemsFieldLabel" xml:space="preserve">
+    <value>Mostrar apenas as minhas perguntas</value>
+  </data>
+  <data name="FilterTimelineStudentInstitutionItemsFieldLabel" xml:space="preserve">
+    <value>Mostrar apenas as perguntas da minha instituição</value>
+  </data>
+  <data name="UserOfflineStatusText" xml:space="preserve">
+    <value>offline</value>
+  </data>
+  <data name="UserOnlineStatusText" xml:space="preserve">
+    <value>online</value>
+  </data>
+  <data name="NewAnswerToQuestionNotificationTitle" xml:space="preserve">
+    <value>A sua pergunta tem uma nova resposta</value>
+  </data>
+  <data name="NewQuestionViewTitle" xml:space="preserve">
+    <value>Nova pergunta</value>
+  </data>
+  <data name="VideoAnswerQuestionCreationModalMessage" xml:space="preserve">
+    <value>Para que a videoconferência que você participou seja disponibilizada para os outros estudantes, uma pergunta deve ser criada.
+Crie uma pergunta com assunto tratado na videoconferência e nós vamos associá-la à pergunta para você!</value>
+  </data>
+  <data name="NewQuestionSubmitButtonText" xml:space="preserve">
+    <value>Perguntar!</value>
+  </data>
+  <data name="NewQuestionViewHeader" xml:space="preserve">
+    <value>Qual a sua dúvida?</value>
+  </data>
+  <data name="NewQuestionViewSubheader" xml:space="preserve">
+    <value>Após descrever sua dúvida, adicione tags para que outros estudantes encontrem sua pergunta mais facilmente.</value>
+  </data>
+  <data name="RequiredFieldsText" xml:space="preserve">
+    <value>*Campos obrigatórios</value>
+  </data>
+</root>

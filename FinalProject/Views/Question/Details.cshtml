@@ -1,0 +1,112 @@
+﻿@using FinalProject.LocalResource
+@model FinalProject.ViewModels.QuestionDetailsViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/star-rating.min.css" rel="stylesheet">
+<link href="~/Content/theme-krajee-fa.min.css" rel="stylesheet">
+@Styles.Render("~/bundles/question-details-style")
+
+<div id="details" class="container" data-question-id="@Model.Id">
+    <div class="row">
+        <div class="question-title">
+            <span>@Model.Title</span>
+        </div>
+        <div>
+            <div style="float: left">
+                <img class="question-user-pic" src="@Model.UserPicture" alt=""/>
+            </div>
+            <div class="question-user">
+                <p class="question-user-name"><a href="/Account/Details/@Model.UserId">@Model.UserName</a></p>
+                <p class="question-date">em @Model.DateCreated</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="question-description">
+            @if (string.IsNullOrEmpty(Model.Description))
+            {
+                <h5>Nenhuma descrição</h5>
+            }
+            else
+            {
+                <p>@Html.Raw(Model.Description)</p>
+            }
+        </div>
+        <div class="question-tags">
+            @foreach (var tag in Model.Tags)
+            {
+                <label class="label-tag">@tag</label>
+            }
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        @if (!Model.IsOwner)
+        {
+            if (!Model.CanAnswer)
+            {
+                <h5>Apenas instrutores de assuntos relacionados a esta questão podem respondê-la</h5>
+            }
+            else
+            {
+                <div class="question-new-answer">
+                    <form id="NewAnswerForm" class="form-horizontal" role="form">
+                        @Html.AntiForgeryToken()
+                        <input id="QuestionId" name="QuestionId" class="hidden" value="@Model.Id" />
+                        <div class="form-group">
+                            <textarea id="AnswerText" name="AnswerText" class="form-control" placeholder="@Resource.AnswerQuestionFieldPlaceholder"></textarea>
+                        </div>
+                        <input id="ConfirmButton" class="btn btn-primary" type="button" value="Responder" />
+                    </form>
+                </div>
+            }
+
+            <br/>
+        }
+
+        <div class="answers-container">
+            
+        </div>
+    </div>
+</div>
+
+<div id="confirmAgendaModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-default close" data-dismiss="modal" title="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Nenhum horário agendado esse(a) estudante</h4>
+            </div>
+            <div class="modal-body">
+                <h6>Deseja agendar um horário para poder realizar a videoconferência?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Sim</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="videoModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <video class="video-answer-playing" autoplay="autoplay" controls="controls"></video>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/questionDetails")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/star-rating.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/tinymce/tinymce.min.js")"></script>
+}
