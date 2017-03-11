@@ -1,0 +1,68 @@
+﻿@model FinalProject.ViewModels.LearningMaterialsViewModel
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+
+<section id="materials-section" style="margin-top: 20px">
+    @if (Model?.Materials != null && Model.Materials.Count > 0)
+    {
+        <div class="row form-center">
+            <h4 class="text-center">
+                Materiais de estudo
+                <br/>
+                <small>
+                    Aqui estão alguns materiais que podem te ajudar enquanto você espera a sua pergunta ser moderada!
+                </small>
+            </h4>
+            <br/>
+        </div>
+
+        <div class="row">
+            <ul class="list-group">
+                @foreach (var material in Model.Materials)
+                {
+                    <a href="@material.Link" target="_blank" class="list-group-item">
+                        <p class="list-group-item-heading" style="font-size: 18px">
+                            @material.Title
+                        </p>
+                        <p class="list-group-item-text" style="font-size: 16px">
+                            @material.Source
+                        </p>
+                    </a>
+                }
+            </ul>
+        </div>
+
+        <nav class="text-center" aria-label="Páginas">
+            <ul class="pagination">
+                @for (var page = 1; page <= Model.Pages; page++)
+                {
+                    if (page == Model.CurrentPage)
+                    {
+                        <li class="active"><span class="page-link">@page</span></li>
+                    }
+                    else
+                    {
+
+                        <li><span class="page-link">@page</span></li>
+                    }
+                }
+            </ul>
+        </nav>
+    }
+    else
+    {
+        <div class="row">
+            <h4 class="text-center">
+                Materiais de estudo
+                <br/>
+                <small>
+                    Nenhum material de estudo encontrado =(
+                </small>
+            </h4>
+            <hr/>
+            <h6 class="text-center">
+                Tentamos procurar por materiais de estudos para você utilizar enquanto espera pela pergunta ser moderada, mas não encontramos nada.
+            </h6>
+        </div>
+    }
+</section>

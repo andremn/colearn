@@ -1,0 +1,40 @@
+﻿#calendar { margin-top: 20px; }
+
+#recurrenceInterval { width: 25%; }
+
+.content { margin-top: 50px; }
+
+.calendar-month {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.calendar-header { margin-bottom: 2%; }
+
+.calendar-header > * { display: inline-block; }
+
+.calendar-header .btn-calendar-prev { margin-right: 3%; }
+
+.calendar-header .btn-calendar-next { margin-left: 3%; }
+
+.fc-event-container { cursor: pointer; }
+
+.btn-view-mode {
+    margin-left: 40%;
+    width: 20%;
+}
+
+.calendar-check-box { font-size: 16px; }
+
+.recurrence-label {
+    color: red;
+    font-size: 14px;
+}
+
+i.fa.fa-trash { 
+    font-size: 18px;
+}
+
+.btn-settings {
+    font-size: 20px;
+}

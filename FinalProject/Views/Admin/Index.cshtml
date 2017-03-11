@@ -1,0 +1,86 @@
+﻿@using FinalProject.ViewModels
+@model RegisterInstitutionManagerViewModel
+@{
+    ViewBag.Title = "Requisições pendentes";
+    var institutions = Model.Institutions;
+    var pendingRequestsHiddenClass = institutions.Count > 0 ? "hidden" : string.Empty;
+    var tableHiddenClass = institutions.Count == 0 ? "hidden" : string.Empty;
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet">
+
+<div class="container" style="margin-top: 20px">
+    <div id="noRequestsPending" class="text-center @pendingRequestsHiddenClass">
+        <div>
+            <p>
+                <h5>Nenhuma requisição pendente.</h5>
+            </p>
+        </div>
+    </div>
+    <div class="table-responsive @tableHiddenClass"
+         style="-moz-min-width: 100%; -ms-min-width: 100%; -o-min-width: 100%; -webkit-min-width: 100%; min-height: 100%; min-width: 100%">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome completo</th>
+                <th>Sigla</th>
+                <th>Código</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var number = 1;
+
+                foreach (var institution in institutions)
+                {
+                    var id = institution.Id;
+
+                    <tr id="@id">
+                        <th scope="row">@number</th>
+                        <td>@institution.FullName</td>
+                        <td>@institution.ShortName</td>
+                        <td>@institution.Code</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        id="approveDropdown" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="true">
+                                    Aprovar/Recusar
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="approveDropdown">
+                                    <li>
+                                        <a href="javascript:javascript:window.location='/Account/SetInstitutionManager?requestId=@institution.Id&isInstitutionRequest=true'">Aprovar</a>
+                                    </li>
+                                    <li>
+                                        <a class="deny-link" data-id="@id"
+                                           data-owner-email="@institution.RequesterEmail">
+                                            Recusar
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    number++;
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-6">
+    @Html.Partial("_DenyInstitutionRequestReasonPartial", new DenyInstitutionRequestViewModel())
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Admin/admin.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Admin/adminHub.js")"></script>
+}

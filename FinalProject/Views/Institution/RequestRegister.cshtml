@@ -1,0 +1,103 @@
+﻿@using FinalProject.Common
+@model FinalProject.ViewModels.RegisterInstitutionViewModel
+@{
+    ViewBag.Title = "Nova instituição";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <section id="registerInstitutionForm" class="form-center">
+        <div class="col-xs-12 col-md-6 col-sm-6">
+            @using (Html.BeginForm("RequestRegister", "Institution", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+
+                if (User.IsInRole(UserRoles.SystemAdminRole))
+                {
+                    <h4>Cadastrar nova instituição</h4>
+                }
+                else
+                {
+                    <h4>
+                        Peça o cadastro de uma instituição
+                        <br/>
+                        <small>O pedido irá para moderação e você será notificado assim que terminarmos</small>
+                    </h4>
+                }
+
+                <hr/>
+
+                <h6>*Campos obrigatórios</h6>
+                <span class="help-block"></span>
+
+                if (ViewData.ModelState[string.Empty] != null && ViewData.ModelState[string.Empty].Errors.Count > 0)
+                {
+                    <div class="alert alert-error alert-error-custom">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        @Html.ValidationSummary(true, string.Empty, new {@class = "text-danger"})
+                    </div>
+                }
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-university"></i>*</span>
+                        @Html.TextBoxFor(m => m.FullName, new {@class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.FullName).ToHtmlString())})
+                    </div>
+                </div>
+
+                <span class="help-block"></span>
+
+                @Html.ValidationMessageFor(m => m.FullName, string.Empty, new {@class = "text-danger"})
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-university"></i>*</span>
+                        @Html.TextBoxFor(m => m.ShortName, new {@class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.ShortName).ToHtmlString())})
+                    </div>
+                </div>
+
+                <span class="help-block"></span>
+
+                @Html.ValidationMessageFor(m => m.ShortName, string.Empty, new {@class = "text-danger"})
+
+                <span class="help-block"></span>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-university"></i>*</span>
+                        @Html.TextBoxFor(m => m.Code, new {@class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.Code).ToHtmlString())})
+                    </div>
+                </div>
+
+                <span class="help-block"></span>
+
+                @Html.ValidationMessageFor(m => m.Code, string.Empty, new {@class = "text-danger"})
+
+                <span class="help-block"></span>
+                <span class="help-block"></span>
+
+                <p>
+                    <h6>As informações acima podem ser obtidas através do <a href="http://emec.mec.gov.br/emec/nova" target="_blank">portal do MEC</a></h6>
+                </p>
+
+                if (User.IsInRole(UserRoles.SystemAdminRole))
+                {
+                    <input type="submit" value="Cadastrar" class="btn btn-primary"/>
+                }
+                else
+                {
+                    <br/>
+                    <input type="submit" value="Pedir cadastro" class="btn btn-primary"/>
+                    <br/>
+                }
+            }
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

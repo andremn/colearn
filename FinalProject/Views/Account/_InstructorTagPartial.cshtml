@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+
+@foreach (var tag in Model)
+{
+    <div class="tag-box bounce-in">
+        <form>
+            @Html.AntiForgeryToken()
+            <input class="hidden" name="tag" value="@tag"/>
+            <button type="button" class="remove-tag">×</button>
+            <label>@tag</label>
+        </form>
+    </div>
+}

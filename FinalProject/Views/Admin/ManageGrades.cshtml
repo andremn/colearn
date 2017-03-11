@@ -1,0 +1,60 @@
+﻿@model FinalProject.ViewModels.ManageGradesViewModel
+@{
+    ViewBag.Title = "Formação";
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+
+@Styles.Render("~/bundles/grades-style")
+
+<div class="container">
+    <section id="grades" class="row grades-section">
+        <h5 class="text-center">
+            Níveis Acadêmicos
+            <br />
+            <small>
+                Gerencie os níveis disponíveis para os usuários.
+            </small>
+        </h5>
+
+        <hr />
+
+        <div id="gradesList" class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-lg-offset-4 col-md-offset-3 col-sm-offset-3">
+            <h6>Os níveis podem ser ordenados arrastando-os para cima ou para baixo. Quanto mais no topo um nível está, maior o grau acadêmico dos usuários que o utilizam.</h6>
+            <br />
+            <ul class="list-group">
+                @foreach (var grade in Model.Grades)
+                {
+                    @Html.Partial("_GradeListITemPartial", grade)
+                }
+            </ul>
+
+            @using (Html.BeginForm("CreteGrade", "Admin", FormMethod.Post, new { id = "createGradeForm", @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.Name).ToString()) })
+                        <span class="input-group-btn">
+                            <button id="searchBtn" class="btn btn-default" type="submit"><i class="fa fa-plus"></i></button>
+                        </span>
+                    </div>
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Name, string.Empty, new { @class = "text-danger" })
+                </div>
+            }
+        </div>
+    </section>
+</div>
+
+<div id="editSuccessPopup" class="popup">
+    Formação atualizada
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    @Scripts.Render("~/bundles/grades")
+}

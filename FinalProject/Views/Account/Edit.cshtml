@@ -1,0 +1,297 @@
+﻿@using FinalProject.LocalResource
+@model FinalProject.ViewModels.EditViewModel
+@{
+    ViewBag.Title = Resource.EditViewTitle;
+}
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/Content/bootstrap-select.min.css" rel="stylesheet">
+<link href="~/Content/ajax-bootstrap-select.min.css" rel="stylesheet" />
+
+@Styles.Render("~/bundles/profile-edit-style")
+
+<div class="container">
+    <div class="row text-center">
+        <ul id="tabs" class="nav nav-tabs nav-tabs-heading" data-tabs="tabs">
+            <li class="nav active">
+                <a class="text-uppercase" href="#profile" data-toggle="tab">@Resource.Profile</a>
+            </li>
+            <li class="nav">
+                <a class="text-uppercase" href="#tags" data-toggle="tab">@Resource.Instructor</a>
+            </li>
+        </ul>
+
+        <div id="tabs-content" class="tab-content" style="padding-bottom: 50px;">
+            <div class="tab-pane fade in active" id="profile">
+                <section id="registerForm">
+                    @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4 class="text-center">
+                            Altere os dados da sua conta
+                            <br />
+                            <small>
+                                Aqui você pode alterar os dados da sua conta.
+                            </small>
+                        </h4>
+                        <hr />
+
+                        <h6>*Campos obrigatórios</h6>
+                        <span class="help-block"></span>
+
+                        if (ViewData.ModelState[string.Empty] != null && ViewData.ModelState[string.Empty].Errors.Count > 0)
+                        {
+                            <div class="alert alert-error alert-error-custom">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                            </div>
+                        }
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i>*</span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.FirstName) })
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.FirstName, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i>&nbsp;</span>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.LastName) })
+                            </div>
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i>*</span>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Email) })
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Email, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-university" aria-hidden="true">*</i>&nbsp;&nbsp;</span>
+
+                                @{
+                                    var defaultInstitutionOption = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.Institution).ToHtmlString());
+                                    var institutions = Model.Institutions;
+                                }
+
+                                <select id="Institution" name="Institution" class="selectpicker form-control"
+                                        data-val="true"
+                                        data-live-search="true"
+                                        data-val-required="@defaultInstitutionOption"
+                                        data-style="btn-default select-btn"
+                                        data-selectOnTab="true">
+                                    <option class="filter-item items" value="">@defaultInstitutionOption</option>
+
+                                    @foreach (var institution in institutions)
+                                    {
+                                        var institutionName = $"{institution.FullName} ({institution.ShortName})";
+
+                                        if (institution.Id == Model.Institution)
+                                        {
+                                            <option class="filter-item items"
+                                                    selected="selected"
+                                                    data-filter="@institutionName"
+                                                    data-value="@institution.Id"
+                                                    data-subtext="@institution.ShortName"
+                                                    value="@institution.Id">
+                                                @institution.FullName
+                                            </option>
+                                        }
+                                        else
+                                        {
+                                            <option class="filter-item items"
+                                                    data-filter="@institutionName"
+                                                    data-value="@institution.Id"
+                                                    data-subtext="@institution.ShortName"
+                                                    value="@institution.Id">
+                                                @institution.FullName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Institution, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true">*</i>&nbsp;&nbsp;</span>
+
+                                @{
+                                    var defaultGradeOption = HttpUtility.HtmlDecode(Html.DisplayNameFor(m => m.Grade).ToHtmlString());
+                                    var grades = Model.Grades;
+                                }
+
+                                <select id="gradeSelect" name="Grade" class="selectpicker form-control"
+                                        data-val="true"
+                                        data-live-search="true"
+                                        data-val-required="@defaultGradeOption"
+                                        data-live-search-placeholder="Procure por um nível acadêmico"
+                                        data-style="btn-default select-btn"
+                                        data-selectOnTab="true"
+                                        data-none-results-text="Nenhum nível encontrado"
+                                        title="@defaultGradeOption">
+                                    <option class="filter-item items" value="">@defaultGradeOption</option>
+
+                                    @foreach (var grade in grades)
+                                    {
+                                        var gradeName = grade.Name;
+
+                                        if (grade.IsSelected)
+                                        {
+                                            <option class="filter-item items"
+                                                    selected="selected"
+                                                    data-filter="@gradeName"
+                                                    data-value="@grade.Id"
+                                                    value="@grade.Id">
+                                                @gradeName
+                                            </option>
+                                        }
+                                        else
+                                        {
+                                            <option class="filter-item items"
+                                                    data-filter="@gradeName"
+                                                    data-value="@grade.Id"
+                                                    value="@grade.Id">
+                                                @gradeName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Grade, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i>*</span>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Password) })
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i>&nbsp;</span>
+                                @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.NewPassword) })
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.NewPassword, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+
+                        <span class="help-block"></span>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i>&nbsp;</span>
+                                @Html.PasswordFor(m => m.ConfirmNewPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ConfirmNewPassword) })
+                            </div>
+                            <br />
+                            @Html.ValidationMessageFor(m => m.ConfirmNewPassword, string.Empty, new { @class = "text-danger" })
+                        </div>
+
+                        <span class="help-block"></span>
+                        <span class="help-block"></span>
+
+                        <input type="submit" value="Salvar" class="btn btn-primary" />
+                                    }
+                </section>
+            </div>
+
+            <div class="tab-pane fade" id="tags">
+                <section>
+                    <h4>
+                        @Resource.InstructorTagsViewHeader
+                        <br />
+                        <small>@Resource.InstructorTagsViewSubheader</small>
+                    </h4>
+                    <hr />
+
+                    <div class="row text-center">
+                        <form id="AddTagForm">
+                            @Html.AntiForgeryToken()
+                            <div class="tags-input input-group">
+                                <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+                                <input name="tags" class="form-control"
+                                       data-provide="typeahead"
+                                       placeholder="@Resource.EnterTagNamePlaceholderText" />
+                                <ul id="tag-suggestions" class="dropdown-menu hidden" role="listbox" style="display: block; left: 50px; top: 37px;"></ul>
+                                <span class="input-group-btn">
+                                    <button id="addTagBtn" class="btn btn-default" type="button" disabled>
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <br />
+                            <input id="addTagsBtn" type="button" class="btn btn-primary" value="Adicionar assuntos" />
+                        </form>
+                    </div>
+
+                    <hr />
+
+                    <div class="help-tags">
+                        @if (Model.Tags.Count == 0)
+                        {
+                            <h6 class="empty-tags">@Resource.NoSelfInstructorTagsText</h6>
+                        }
+                        else
+                        {
+                            @Html.Partial("_InstructorTagPartial", Model.Tags)
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="moderatingTagsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">@Resource.NoticeText</h4>
+            </div>
+            <div id="moderatingTagsModalBody" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">@Resource.GotItText</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/select")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ajax-bootstrap-select.min.js")"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/bloodhound.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-tagsinput.min.js")"></script>
+    @Scripts.Render("~/bundles/profile-edit")
+}

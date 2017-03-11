@@ -1,0 +1,20 @@
+﻿@using FinalProject.LocalResource
+@model FinalProject.ViewModels.StudentSearchListViewModel
+
+<section>
+    @if (Model?.Students != null && Model.Students.Count > 0)
+    {
+        <h4 class="text-center">
+            @Resource.RecommendedStudentsSectionTitle
+            <br />
+            <small>@Html.Raw(Resource.RecommendedStudentsSectionSubtitle)</small>
+        </h4>
+        <br/>
+        <div class="recommended-list">
+            @foreach (var student in Model.Students)
+            {
+                @Html.Partial("_SearchItemPartial", student)
+            }
+        </div>
+    }
+</section>

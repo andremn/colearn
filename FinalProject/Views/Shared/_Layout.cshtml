@@ -1,0 +1,239 @@
+﻿@using FinalProject.Common
+@using FinalProject.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @if (string.IsNullOrEmpty(ViewBag.Title))
+    {
+        <title>CoLearn</title>
+    }
+    else
+    {
+        <title>@ViewBag.Title - CoLearn</title>
+    }
+
+    @{
+        var isAuthenticated = Request.IsAuthenticated;
+        var isStudent = User.IsInRole(UserRoles.StudentRole);
+        var isModerator = User.IsInRole(UserRoles.InstitutionModeratorRole);
+        var isAdmin = User.IsInRole(UserRoles.SystemAdminRole);
+    }
+
+    @Styles.Render("~/Content/css")
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+
+            @if (isAuthenticated)
+            {
+                <ul class="nav navbar-nav pull-right non-mobile">
+
+                    <li class="pull-left">
+                        <a href="/Account/Details">
+                            <div class="user-pic" style="background-image: url(@User.Identity.GetProfilePicture())" title="Perfil"></div>
+                        </a>
+                    </li>
+
+                    <li class="dropdown pull-right" style="margin-left: -12px">
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "hidden" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        }
+
+                        <a id="optionsMenuToggle" href="#" class="pull-right" data-target="#optionsMenu">
+                            <span class="nav-user-name">@User.Identity.GetName(Request.GetOwinContext())</span>
+                            <span class="caret"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav pull-right non-mobile">
+                    <li>
+                        <a id="notificationCounter" class="btn btn-link notification-toggle" href="#" data-title-plural="notificações" data-title-singular="notificação">
+                            <i class="fa fa-bell"></i>
+                            <b>0</b>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#myNavbar" style="margin-left: 5px">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="~/">CoLearn</a>
+                </div>
+
+                <div class="collapse navbar-collapse pull-right-lg" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        @if (isStudent || isModerator)
+                        {
+                            <li>
+                                <a class="btn btn-link" href="/Question/Create" title="Nova pergunta">
+                                    <i class="fa fa-plus" aria-hidden="true">
+                                        <span class="hidden-sm hidden-lg hidden-md">Nova pergunta</span>
+                                    </i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="btn btn-link" href="/Preference" title="Preferências">
+                                    <i class="fa fa-sliders" aria-hidden="true">
+                                        <span class="hidden-sm hidden-lg hidden-md">Preferências</span>
+                                    </i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a id="searchButton" class="btn btn-link" href="/Search" title="Buscar estudantes">
+                                    <i class="fa fa-search">
+                                        <span class="hidden-sm hidden-lg hidden-md">Buscar estudantes</span>
+                                    </i>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="~/">CoLearn</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @if (Request.IsAuthenticated)
+    {
+        <div id="videoChatCallingModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nova videoconferência</h4>
+                    </div>
+                    <div class="modal-body">
+                        {0} está iniciando uma nova videoconferência com você
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Atender</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Recusar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="videoChatRefusedModal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Chamada não atendida</h4>
+                    </div>
+                    <div class="modal-body">
+                        {0} não atendeu a chamada. Tente novamente.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Entendi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification-popup">
+            <h6 class="text-center">Nenhuma notificação</h6>
+        </div>
+    }
+
+    <ul id="optionsMenu" class="options-menu">
+        @if (isStudent || isModerator)
+        {
+            <li>
+                <a href="/Account/Edit">
+                    <i class="fa fa-pencil-square-o"></i>
+                    Editar perfil
+                </a>
+            </li>
+
+            <li>
+                <a href="/Agenda">
+                    <i class="fa fa-calendar"></i>
+                    Agenda
+                </a>
+            </li>
+
+            if (isModerator)
+            {
+                <li>
+                    <a href="/Tag/Index">
+                        <i class="fa fa-plus"></i>
+                        Controlar tags
+                    </a>
+                </li>
+            }
+        }
+        else if (isAdmin)
+        {
+            <li>
+                <a href="/Institution/RequestRegister">
+                    <i class="fa fa-plus"></i>
+                    Adicionar instituição
+                </a>
+            </li>
+
+            <li>
+                <a href="/Account/SetInstitutionManager">
+                    <i class="fa fa-plus"></i>
+                    Adicionar moderador
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/ManageGrades">
+                    <i class="fa fa-graduation-cap"></i>
+                    Gerenciar Níveis
+                </a>
+            </li>
+
+            <li>
+                <a href="/Preference">
+                    <i class="fa fa-tasks"></i>
+                    Preferências
+                </a>
+            </li>
+        }
+
+        <li>
+            <a href="javascript:document.getElementById('logoutForm').submit()">
+                <i class="fa fa-sign-out"></i>
+                Sair
+            </a>
+        </li>
+    </ul>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/signalr/hubs"></script>
+    @RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/_layout")
+
+    @if (isModerator)
+    {
+        @Scripts.Render("~/bundles/_layout-institution")
+    }
+
+    @if (isStudent)
+    {
+        @Scripts.Render("~/bundles/_layout-student")
+    }
+</body>
+</html>
